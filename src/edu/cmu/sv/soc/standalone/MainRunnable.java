@@ -11,7 +11,7 @@ public class MainRunnable {
 	public static void main(String[] args) {
 		IWeather weatherInfo = new WorldWeatherOnlineImpl();
 		
-		String response1 = weatherInfo.getWeatherInfo("94087");
+		String response1 = weatherInfo.getWeatherInfo("94087", 3);
 		log.trace("Weather information 1 = " + response1);
 		
 
