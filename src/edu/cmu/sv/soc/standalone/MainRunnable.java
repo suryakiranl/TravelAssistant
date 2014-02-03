@@ -2,6 +2,10 @@ package edu.cmu.sv.soc.standalone;
 
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import edu.cmu.sv.soc.dto.WeatherAPIResponse;
 import edu.cmu.sv.soc.service.IWeather;
 import edu.cmu.sv.soc.service.WorldWeatherOnlineImpl;
 
@@ -11,10 +15,14 @@ public class MainRunnable {
 	public static void main(String[] args) {
 		IWeather weatherInfo = new WorldWeatherOnlineImpl();
 		
-		String response1 = weatherInfo.getWeatherInfo("94087", 3);
-		log.trace("Weather information 1 = " + response1);
+		String jsonResponse = weatherInfo.getWeatherInfo("94087", 3);
+		log.trace("Weather information 1 = " + jsonResponse);
 		
-
+		//Gson gson = new Gson();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+		WeatherAPIResponse weatherData = gson.fromJson(jsonResponse, WeatherAPIResponse.class);
+		
+		log.trace("Weather Respnse as an object = " + weatherData);
 	}
 
 }

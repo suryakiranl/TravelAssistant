@@ -35,6 +35,8 @@ public class HttpHelper {
 	 */
 	public static String httpGet(String urlStr) throws IOException {
 		String response;
+		
+		log.trace("URL = " + urlStr);
 
 		// Prepare the URL object
 		URL url = new URL(urlStr);
