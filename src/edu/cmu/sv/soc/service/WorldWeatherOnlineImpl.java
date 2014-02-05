@@ -1,13 +1,12 @@
 package edu.cmu.sv.soc.service;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 
 import org.apache.log4j.Logger;
 
+import edu.cmu.sv.soc.dto.WeatherAPIResponse;
 import edu.cmu.sv.soc.util.HttpHelper;
+import edu.cmu.sv.soc.util.StaticUtils;
 
 public class WorldWeatherOnlineImpl implements IWeather {
 	private static final Logger log = Logger
@@ -18,50 +17,42 @@ public class WorldWeatherOnlineImpl implements IWeather {
 	private static final String URL_PREFIX = "http://api.worldweatheronline.com/free/v1/weather.ashx"
 			+ "?key=m7b32qfztwua6js7cjg2px6h" + "&format=json";
 
-	/**
-	 * Method to encode the parameter value so that spaces are being taken care
-	 * of when city names are queried.
-	 * 
-	 * @param param
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	private String encodeParameter(String param)
-			throws UnsupportedEncodingException {
-		param = URLEncoder.encode(param, Charset.defaultCharset().name());
-		log.trace("Encoded Param value = " + param);
-
-		return param;
-	}
-
 	@Override
-	public String getWeatherInfo(String param) {
-		String response = null;
-
+	public WeatherAPIResponse getWeatherInfo(String param) {
+		WeatherAPIResponse weatherData = null;
 		try {
-			param = encodeParameter(param);
+			param = StaticUtils.encodeParameter(param);
 			String url = URL_PREFIX + "&q=" + param;
-			response = HttpHelper.httpGet(url);
+			String response = HttpHelper.httpGet(url);
+			log.trace("Weather information = " + response);
+
+			weatherData = StaticUtils.gson.fromJson(response,
+					WeatherAPIResponse.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return response;
+		return weatherData;
 	}
 
 	@Override
-	public String getWeatherInfo(String cityNameOrZipCode, int numOfDays) {
-		String response = null;
+	public WeatherAPIResponse getWeatherInfo(String cityNameOrZipCode,
+			int numOfDays) {
+		WeatherAPIResponse weatherData = null;
 
 		try {
-			cityNameOrZipCode = encodeParameter(cityNameOrZipCode);
+			cityNameOrZipCode = StaticUtils.encodeParameter(cityNameOrZipCode);
 			String url = URL_PREFIX + "&q=" + cityNameOrZipCode
 					+ "&num_of_days=" + numOfDays;
-			response = HttpHelper.httpGet(url);
+			String response = HttpHelper.httpGet(url);
+			log.trace("Weather information = " + response);
+
+			weatherData = StaticUtils.gson.fromJson(response,
+					WeatherAPIResponse.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return response;
+		return weatherData;
 	}
 }

@@ -48,4 +48,116 @@ public class WeatherGson {
 
 		return sb.toString();
 	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getPrecipMM() {
+		return precipMM;
+	}
+
+	public void setPrecipMM(String precipMM) {
+		this.precipMM = precipMM;
+	}
+
+	public String getTempMaxC() {
+		return tempMaxC;
+	}
+
+	public void setTempMaxC(String tempMaxC) {
+		this.tempMaxC = tempMaxC;
+	}
+
+	public String getTempMaxF() {
+		return tempMaxF;
+	}
+
+	public void setTempMaxF(String tempMaxF) {
+		this.tempMaxF = tempMaxF;
+	}
+
+	public String getTempMinC() {
+		return tempMinC;
+	}
+
+	public void setTempMinC(String tempMinC) {
+		this.tempMinC = tempMinC;
+	}
+
+	public String getTempMinF() {
+		return tempMinF;
+	}
+
+	public void setTempMinF(String tempMinF) {
+		this.tempMinF = tempMinF;
+	}
+
+	public String getWeatherCode() {
+		return weatherCode;
+	}
+
+	public void setWeatherCode(String weatherCode) {
+		this.weatherCode = weatherCode;
+	}
+
+	public ValueGson[] getWeatherDesc() {
+		return weatherDesc;
+	}
+
+	public void setWeatherDesc(ValueGson[] weatherDesc) {
+		this.weatherDesc = weatherDesc;
+	}
+
+	public ValueGson[] getWeatherIconUrl() {
+		return weatherIconUrl;
+	}
+
+	public void setWeatherIconUrl(ValueGson[] weatherIconUrl) {
+		this.weatherIconUrl = weatherIconUrl;
+	}
+
+	public String getWinddir16Point() {
+		return winddir16Point;
+	}
+
+	public void setWinddir16Point(String winddir16Point) {
+		this.winddir16Point = winddir16Point;
+	}
+
+	public String getWinddirDegree() {
+		return winddirDegree;
+	}
+
+	public void setWinddirDegree(String winddirDegree) {
+		this.winddirDegree = winddirDegree;
+	}
+
+	public String getWinddirection() {
+		return winddirection;
+	}
+
+	public void setWinddirection(String winddirection) {
+		this.winddirection = winddirection;
+	}
+
+	public String getWindspeedKmph() {
+		return windspeedKmph;
+	}
+
+	public void setWindspeedKmph(String windspeedKmph) {
+		this.windspeedKmph = windspeedKmph;
+	}
+
+	public String getWindspeedMiles() {
+		return windspeedMiles;
+	}
+
+	public void setWindspeedMiles(String windspeedMiles) {
+		this.windspeedMiles = windspeedMiles;
+	}
 }

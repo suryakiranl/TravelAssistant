@@ -33,4 +33,28 @@ public class WeatherReponseDataGson {
 
 		return sb.toString();
 	}
+
+	public CurrentConditionGson[] getCurrent_condition() {
+		return current_condition;
+	}
+
+	public void setCurrent_condition(CurrentConditionGson[] current_condition) {
+		this.current_condition = current_condition;
+	}
+
+	public WeatherRequestGson[] getRequest() {
+		return request;
+	}
+
+	public void setRequest(WeatherRequestGson[] request) {
+		this.request = request;
+	}
+
+	public WeatherGson[] getWeather() {
+		return weather;
+	}
+
+	public void setWeather(WeatherGson[] weather) {
+		this.weather = weather;
+	}
 }
