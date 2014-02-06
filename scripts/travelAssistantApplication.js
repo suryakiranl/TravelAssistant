@@ -8,14 +8,14 @@
 			e.preventDefault();
 			$.ajax('http://api.worldweatheronline.com/free/v1/weather.ashx', {
 
-				type: 'POST',
+				type: 'GET',
   				data: {
   					   "key": 'm7b32qfztwua6js7cjg2px6h', 
   					   "format": 'json', 
-  					   "q": '$("#loc").val()'},
+  					   "q": $("#loc").val()},
 
   				success: function( data ) {
-    				$( "#weather-details" ).html( "<strong>" + "Hit the URL" + "</strong> degrees: " + data ); },
+    				$( "#weather-details" ).html( "<strong>" + "Hit the URL: " + "</strong> degrees: " + data ); },
 
     			error: function(request, errorType, errorMessage){
     				alert('Error: ' + errorType + " with message " + errorMessage); },
