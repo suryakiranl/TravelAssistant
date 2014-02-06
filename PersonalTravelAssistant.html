@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+	<title>Travel Assistant</title>
+	<link rel="stylesheet" href="css/bootstrap.css"/>
+
+	<script type="text/javascript" src="scripts/jquery-2.0.2.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap.js"></script>
+	<script type="text/javascript" src="scripts/travelAssistantApplication.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-inverse" role="navigation">
+			<h4 class="navbar-brand">Personal Travel Assistant</h4>
+		</nav>
+	
+		<ul id="topTabs" class="nav nav-tabs">
+			<li class="active"><a href="#weather" data-toggle="tab">Weather</a></li>
+			<li><a href="#travel" data-toggle="tab">Travel</a></li>
+		</ul>
+
+		<div id="myTabContent" class="tab-content">
+	      <div class="tab-pane fade active in" id="weather">
+			<form class="bs-example" role="form">
+				<div>
+					<h4>Enter the location to get weather information</h4>
+				</div>
+
+				<form class="navbar-form navbar-left" role="weatherInfo">
+					<div class="form-group">
+						<input type="text" class="form-control" id="loc" placeholder="Enter location or zip">			
+					</div>
+					<button type="POST" class="btn btn-default" id="getWeatherInfo">Submit</button>			
+					<button type="submit" class="btn btn-default" id="resetWeatherInfo">Reset</button>
+				</form>
+
+				<div class="weatherPanel" id="weather-info" style="margin-top:5px; display:block">
+					<div class="panel panel-primary">
+					    <div class="panel-heading">
+					        <h3 class="panel-title">Weather Details</h3>
+					    </div>
+					      
+					    <div class="panel-body" id="weatherDetails">
+					    	<h5>Weather Details Here</h5>
+					    </div>
+					</div>
+				</div>
+	 		</form>
+	      </div>
+
+
+	      <div class="tab-pane fade" id="travel">
+
+			<form class="bs-example" role="form">
+				<div>
+					<h4>Enter the starting location</h4>
+				</div>
+
+				<form class="navbar-form navbar-left" role="startLocInfo">
+					<div class="form-group">
+						<input type="text" class="form-control" id="startLoc" placeholder="Enter starting location">	
+						
+						<div>
+							<h4>Enter the destination </h4>
+						</div>
+
+						<input type="text" class="form-control" id="destloc" placeholder="Enter destination">					
+					</div>
+				</form>
+
+				<button type="submit" class="btn btn-default" id="getTravelInfo">Submit</button>			
+				<button type="submit" class="btn btn-default" id="resetTravelInfo">Reset</button>
+
+				<div class="travelPanel" id="travel-info" style="margin-top:5px; display:block">
+					<div class="panel panel-primary">
+					    <div class="panel-heading">
+					        <h3 class="panel-title">Travel Details</h3>
+					    </div>
+					      
+					    <div class="panel-body" id="travelDetails">
+					    	<h5>Travel Details Here</h5>
+					    </div>
+					</div>
+				</div>
+	 		</form>
+	      
+	      </div>
+
+
+    	</div>
+		</div>
+</body>
+</html>
