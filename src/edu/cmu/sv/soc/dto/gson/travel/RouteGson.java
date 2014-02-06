@@ -6,6 +6,14 @@ public class RouteGson {
 	private float duration;
 	private StopGson[] stops;
 	private SegmentGson[] segments;
+	private IndicativePriceGson indicativePrice;
+	
+	public IndicativePriceGson getIndicativePrice() {
+		return indicativePrice;
+	}
+	public void setIndicativePrice(IndicativePriceGson indicativePrice) {
+		this.indicativePrice = indicativePrice;
+	}
 	public String getName() {
 		return name;
 	}

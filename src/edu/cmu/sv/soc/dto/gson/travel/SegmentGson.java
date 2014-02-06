@@ -10,8 +10,30 @@ public class SegmentGson {
 	private String sPos; // was PositionGson
 	private String tName;
 	private String tPos; // was PositionGson
+	private String sCode; // Will be available only for flight
+	private String tCode; // Will be available only for flight
 	private IndicativePriceGson indicativePrice;
 	private String path; // had to be Path object
+	private FlightItineraryGson[] itineraries; // Will be available only for flight
+	
+	public String getsCode() {
+		return sCode;
+	}
+	public void setsCode(String sCode) {
+		this.sCode = sCode;
+	}
+	public String gettCode() {
+		return tCode;
+	}
+	public void settCode(String tCode) {
+		this.tCode = tCode;
+	}
+	public FlightItineraryGson[] getItineraries() {
+		return itineraries;
+	}
+	public void setItineraries(FlightItineraryGson[] itineraries) {
+		this.itineraries = itineraries;
+	}
 	public String getKind() {
 		return kind;
 	}

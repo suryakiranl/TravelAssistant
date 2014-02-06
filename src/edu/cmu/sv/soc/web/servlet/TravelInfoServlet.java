@@ -11,9 +11,8 @@ import org.apache.log4j.Logger;
 
 import edu.cmu.sv.soc.dto.TravelSearchRequest;
 import edu.cmu.sv.soc.dto.TravelSearchResponse;
-import edu.cmu.sv.soc.dto.gson.travel.AirlineGson;
 import edu.cmu.sv.soc.dto.gson.travel.RouteGson;
-import edu.cmu.sv.soc.dto.gson.travel.StopGson;
+import edu.cmu.sv.soc.dto.gson.travel.SegmentGson;
 import edu.cmu.sv.soc.service.ITravel;
 import edu.cmu.sv.soc.service.Rome2RioTravelImpl;
 
@@ -72,29 +71,86 @@ public class TravelInfoServlet extends HttpServlet {
 	private String prepareCurrentStatus(TravelSearchResponse travel) {
 		StringBuffer sb = new StringBuffer();
 
-		RouteGson[] routes = travel.getRoutes();
-		StopGson[] stops = routes[0].getStops();
-		AirlineGson[] airline = travel.getAirlines();
-
-		sb.append("<strong>" + routes[0].getName() + "</strong>");
-		sb.append("<hr/>");
-		sb.append("<div class='container'>");
-		sb.append("<div class='row'><div class='col-md-2'>");
-		sb.append("Distance: </div><div class='col-md-2'>"
-				+ routes[0].getDistance() + " miles");
-		sb.append("</div></div><div class='row'><div class='col-md-2'>");
-		sb.append("Duration: </div><div class='col-md-2'>"
-				+ routes[0].getDuration() + " minutes");
-		sb.append("</div></div><div class='row'><div class='col-md-2'>");
-		sb.append("Stops: </div><div class='col-md-2'>" + stops[0].getName());
-		sb.append("</div></div><div class='row'><div class='col-md-2'>");
-		sb.append("</div></div><div class='row'><div class='col-md-2'>");
-		sb.append("Airline: </div><div class='col-md-2'>"
-				+ airline[0].getName());
-		sb.append("</div></div><div class='row'><div class='col-md-2'>");
-		sb.append("</div></div></div>");
+		sb.append("<strong>Travel Itinerary Options</strong>");
+		sb.append(prepareRoutes(travel.getRoutes()));
 
 		return sb.toString();
 	}
 
+	private String prepareRoutes(RouteGson[] routes) {
+		StringBuffer sb = new StringBuffer();
+
+		if (routes != null) {
+			for (RouteGson route : routes) {
+				sb.append("<hr/>");
+				sb.append("<div class='container'>");
+				sb.append("<div class='row'><div class='col-md-2'>");
+				sb.append("<strong>Route Name: </strong>")
+						.append("</div><div class='col-md-6'>")
+						.append(route.getName());
+				sb.append("</div></div><div class='row'><div class='col-md-2'>");
+				sb.append("<strong>Distance:</strong>")
+						.append("</div><div class='col-md-6'>")
+						.append(route.getDistance()).append(" miles");
+				sb.append("</div></div><div class='row'><div class='col-md-2'>");
+				sb.append("<strong>Duration:</strong>")
+						.append("</div><div class='col-md-6'>")
+						.append(route.getDuration()).append(" minutes");
+				sb.append("</div></div><div class='row'><div class='col-md-2'>");
+
+				// Add indicative pricing if it is available.
+				if (route.getIndicativePrice() != null) {
+					sb.append("<strong>Indicative Price:</strong>")
+							.append("</div><div class='col-md-6'>")
+							.append(route.getIndicativePrice().getPrice())
+							.append(" ")
+							.append(route.getIndicativePrice().getCurrency());
+					sb.append("</div></div><div class='row'><div class='col-md-2'>");
+				}
+				sb.append("<strong>Segments in this route:</strong>")
+						.append("</div><div class='col-md-6'>")
+						.append(prepareSegments(route.getSegments()));
+				sb.append("</div></div></div>");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private String prepareSegments(SegmentGson[] segments) {
+		StringBuffer sb = new StringBuffer();
+
+		if (segments != null) {
+			for (SegmentGson segment : segments) {
+				sb.append("<strong> ===== Segment ===== </strong>").append(
+						"<br/>");
+				sb.append("Mode of Transportation: ").append(segment.getKind())
+						.append("<br/>");
+				String sourceName, destName;
+				if ("flight".equalsIgnoreCase(segment.getKind())) {
+					sourceName = segment.getsCode();
+					destName = segment.gettCode();
+				} else {
+					sourceName = segment.getsName();
+					destName = segment.gettName();
+				}
+
+				sb.append("From: ").append(sourceName).append("<br/>");
+				sb.append("To: ").append(destName).append("<br/>");
+				sb.append("Distance: ").append(segment.getDistance());
+				if (segment.getIsImperial() == 1) {
+					sb.append(" kms").append("<br/>");
+				} else {
+					sb.append(" miles").append("<br/>");
+				}
+				sb.append("Duration: ")
+						.append(new Float(segment.getDuration()).intValue())
+						.append(" mins").append("<br/>");
+			}
+		} else {
+			sb.append("No segments listed.");
+		}
+
+		return sb.toString();
+	}
 }
