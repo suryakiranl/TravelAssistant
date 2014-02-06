@@ -16,22 +16,27 @@ import edu.cmu.sv.soc.dto.gson.WeatherRequestGson;
 import edu.cmu.sv.soc.service.IWeather;
 import edu.cmu.sv.soc.service.WorldWeatherOnlineImpl;
 
+/**
+ * Servlet implementation class WeatherInfoServlet
+ */
+
 public class WeatherInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger log = Logger.getLogger(WeatherInfoServlet.class);
 	
+	/**
+     * @see HttpServlet#HttpServlet()
+     */
     public WeatherInfoServlet() {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.trace("Inside doGet method.");
-		
+    /**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 		String cityNameorZip = request.getParameter("cityNameOrZip");
 		String numberOfDays = request.getParameter("days");
-		
-		log.debug("City name or Zip = " + cityNameorZip);
-		log.debug("Days = " + numberOfDays);
 		
 		WeatherAPIResponse weather = null;
 		IWeather ws = new WorldWeatherOnlineImpl();
@@ -64,15 +69,20 @@ public class WeatherInfoServlet extends HttpServlet {
 		response.getWriter().write(sb.toString());
 		response.flushBuffer();
 		
-		log.trace("Exiting doGet method.");
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		log.trace("Inside doPost method.");
+
 		response.getWriter().write("POST method is not implemented for this Servlet. Please use GET.");
-		log.trace("Exiting doPost method.");		
+	
 	}
 	
+	/**
+	 * @param weather - WeatherAPIResponse
+	 */	
 	private String prepareCurrentCondition(WeatherAPIResponse weather) {
 		StringBuffer sb = new StringBuffer();
 		

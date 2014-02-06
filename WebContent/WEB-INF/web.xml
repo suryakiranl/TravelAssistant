@@ -24,4 +24,14 @@
     <servlet-name>WeatherInfoServlet</servlet-name>
     <url-pattern>/WeatherInfoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description>Servlet which provides travel information based on city names</description>
+    <display-name>TravelInfoServlet</display-name>
+    <servlet-name>TravelInfoServlet</servlet-name>
+    <servlet-class>edu.cmu.sv.soc.web.servlet.TravelInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TravelInfoServlet</servlet-name>
+    <url-pattern>/TravelInfoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
