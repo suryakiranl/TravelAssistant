@@ -4,18 +4,15 @@
 		});
 
 		$("#getWeatherInfo").on('click', function(e){
-
 			e.preventDefault();
-			$.ajax('http://api.worldweatheronline.com/free/v1/weather.ashx', {
-
+			var zipCode = $("#loc").val();
+			$.ajax({
 				type: 'GET',
-  				data: {
-  					   "key": 'm7b32qfztwua6js7cjg2px6h', 
-  					   "format": 'json', 
-  					   "q": $("#loc").val()},
-
+				url: 'WeatherInfoServlet',
+  				data: { "cityNameOrZip" : zipCode },
   				success: function( data ) {
-    				$( "#weather-details" ).html( "<strong>" + "Hit the URL: " + "</strong> degrees: " + data ); },
+  					alert("Result from server = " + data);
+    				$( "#weatherDetails" ).html( data ); },
 
     			error: function(request, errorType, errorMessage){
     				alert('Error: ' + errorType + " with message " + errorMessage); },
