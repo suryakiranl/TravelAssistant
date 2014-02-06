@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import edu.cmu.sv.soc.dto.WeatherAPIResponse;
 import edu.cmu.sv.soc.dto.gson.CurrentConditionGson;
+import edu.cmu.sv.soc.dto.gson.MsgGson;
 import edu.cmu.sv.soc.service.IWeather;
 import edu.cmu.sv.soc.service.WorldWeatherOnlineImpl;
 
@@ -46,9 +47,18 @@ public class WeatherInfoServlet extends HttpServlet {
 		}
 		
 		StringBuffer sb = new StringBuffer();
-		CurrentConditionGson cc = weather.getData().getCurrent_condition()[0];
-		sb.append(cc.getTemp_F() + "F");
-		sb.append(" / " + cc.getTemp_C() + "C");
+		if( weather.getData().getCurrent_condition() != null ) {
+			CurrentConditionGson cc = weather.getData().getCurrent_condition()[0];
+			sb.append(cc.getTemp_F() + "F");
+			sb.append(" / " + cc.getTemp_C() + "C");	
+		} else {
+			MsgGson[] messg = weather.getData().getError();
+			if(messg == null) {
+				sb.append("<b>No information/message obtained from weather server.</b>");
+			} else {
+				sb.append("<b>" + messg[0].getMsg() + "</b>");
+			}
+		}
 		
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/plain");

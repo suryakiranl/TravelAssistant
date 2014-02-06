@@ -4,6 +4,7 @@ public class WeatherReponseDataGson {
 	private CurrentConditionGson[] current_condition;
 	private WeatherRequestGson[] request;
 	private WeatherGson[] weather;
+	private MsgGson[] error;
 
 	@Override
 	public String toString() {
@@ -56,5 +57,13 @@ public class WeatherReponseDataGson {
 
 	public void setWeather(WeatherGson[] weather) {
 		this.weather = weather;
+	}
+	
+	public MsgGson[] getError() {
+		return error;
+	}
+
+	public void setError(MsgGson[] error) {
+		this.error = error;
 	}
 }
