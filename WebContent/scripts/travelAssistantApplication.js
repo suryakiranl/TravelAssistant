@@ -11,9 +11,8 @@
 				url: 'WeatherInfoServlet',
   				data: { "cityNameOrZip" : zipCode },
   				success: function( data ) {
-  					alert("Result from server = " + data);
-    				$( "#weatherDetails" ).html( data ); },
-
+    				$( "#weatherDetails" ).html( data ); 
+    			},
     			error: function(request, errorType, errorMessage){
     				alert('Error: ' + errorType + " with message " + errorMessage); },
     			});
